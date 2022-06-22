@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+$dark-mode-background:hsl(207, 26%, 17%) ;
+$dark-mode-body-background: hsl(209, 23%, 22%);
 *{
     margin: 0;
     padding: 0;
@@ -11,19 +13,22 @@
     justify-content: space-between;
     align-content: center;
     place-items: center;
-    margin: 20px auto 0px auto;
-    padding-bottom: 20px;
+    margin: 0 auto 0px auto;
+    padding: 20px 0;
 }
 
 
 body{
     background-color:  hsl(0, 0%, 98%);
+    
 }
 header{
     background-color: hsl(0, 0%, 100%);
     box-shadow: 0px 3px 1px hsl(0, 0%, 90%);
     .container{
         @include container();
+
+        
         button{
             background: none;
             display: flex;
@@ -43,7 +48,7 @@ section{
 
     .container{
         
-        .inputs{
+        .inputs-cont{
             place-items: center;
             @include container();
             input[name=search]{
@@ -52,6 +57,7 @@ section{
                 border: none;
                 border-radius: 5px;
                 box-shadow: 0 0 7px hsl(0, 0%, 70%);
+                color: white;
             }
 
             select{
@@ -59,49 +65,52 @@ section{
                 border: none;
                 border-radius: 5px;
                 box-shadow: 0 0 7px hsl(0, 0%, 70%);
-
             }
         }
 
         #countries{
-            display: grid;
+            display: flex;
+            flex-wrap: wrap;
             max-width: 90vw;
             margin: 0 auto;
-            place-items: center;
+            justify-content: space-evenly;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             
             .card{
-                height: max-content;
+                height: 350;
                 background-color: hsl(0, 0%, 100%);
                 box-shadow: 2px 1px 10px hsl(0, 0%, 90%);
-                padding-bottom: 20px;
-                .country_info{
-                    margin-left: 20px;
-                    .country_name{
-                        margin-bottom: 8px;
-                    }
-        
-                    .population{
-                        color:  hsl(0, 0%, 52%)
-                    }
-        
-                    .region{
-                        color:  hsl(0, 0%, 52%)
-                    }
-        
-                    .capital{
-                        color:  hsl(0, 0%, 52%)
-                    }
+                padding-bottom: 30px;
+                width: 300px;
+                border-radius: 10px;
+                img{
+                    border-radius: 10px 10px 0px 0px;
+                    width: 300px;
+                    height: 200px;
+                }
+                .country_name{
+                    margin: 10px 0 8px 0;
+                }
+    
+                .population{
+                    color:  hsl(0, 0%, 52%)
+                }
+    
+                .region{
+                    color:  hsl(0, 0%, 52%)
+                }
+    
+                .capital{
+                    color:  hsl(0, 0%, 52%)
                 }
             }
         }
         #pagination{
             display: flex;
             max-width: 90%;
-
             justify-content: center;
-            margin: 0 auto;
+            margin: 20px auto 0 auto;
             gap: 5px;
             button{
                 padding: 10px;
@@ -109,8 +118,11 @@ section{
                 cursor: pointer;
                 outline: none;
                 border: none;
+                border-radius: 5px;
                 background-color: hsl(0, 0%, 85%);
-             
+                img{
+                    fill: white;
+                }
             }
         }
     }
@@ -118,4 +130,29 @@ section{
 
 .active{
     background: cyan !important ;
+}
+
+.dark-mode-bg{
+    background: $dark-mode-background !important;
+    color: white ;
+    box-shadow: none !important;
+}
+
+.dark-btn{
+    color: white;
+    box-shadow: none;
+}
+
+.white-dark-mode-img{
+    filter: invert(100%) sepia(50%) saturate(1352%) hue-rotate(180deg) brightness(119%) contrast(119%);
+}
+
+.dark-bg{
+    background: $dark-mode-body-background !important;
+    box-shadow: none;
+}
+
+.dark-p-btn{
+    background: $dark-mode-background !important;
+    color: white;
 }

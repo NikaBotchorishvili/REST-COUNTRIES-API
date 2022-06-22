@@ -20,8 +20,8 @@ header .container {
   justify-content: space-between;
   align-content: center;
   place-items: center;
-  margin: 20px auto 0px auto;
-  padding-bottom: 20px;
+  margin: 0 auto 0px auto;
+  padding: 20px 0;
 }
 header .container button {
   background: none;
@@ -36,65 +36,69 @@ header .container button img {
   width: 2rem;
 }
 
-section .container .inputs {
+section .container .inputs-cont {
   place-items: center;
   max-width: 90%;
   display: flex;
   justify-content: space-between;
   align-content: center;
   place-items: center;
-  margin: 20px auto 0px auto;
-  padding-bottom: 20px;
+  margin: 0 auto 0px auto;
+  padding: 20px 0;
 }
-section .container .inputs input[name=search] {
+section .container .inputs-cont input[name=search] {
   width: 300px;
   padding: 15px 10px;
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 7px hsl(0deg, 0%, 70%);
+  color: white;
 }
-section .container .inputs select {
+section .container .inputs-cont select {
   padding: 15px 30px;
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 7px hsl(0deg, 0%, 70%);
 }
 section .container #countries {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   max-width: 90vw;
   margin: 0 auto;
-  place-items: center;
+  justify-content: space-evenly;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 section .container #countries .card {
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
+  height: 350;
   background-color: hsl(0deg, 0%, 100%);
   box-shadow: 2px 1px 10px hsl(0deg, 0%, 90%);
-  padding-bottom: 20px;
+  padding-bottom: 30px;
+  width: 300px;
+  border-radius: 10px;
 }
-section .container #countries .card .country_info {
-  margin-left: 20px;
+section .container #countries .card img {
+  border-radius: 10px 10px 0px 0px;
+  width: 300px;
+  height: 200px;
 }
-section .container #countries .card .country_info .country_name {
-  margin-bottom: 8px;
+section .container #countries .card .country_name {
+  margin: 10px 0 8px 0;
 }
-section .container #countries .card .country_info .population {
+section .container #countries .card .population {
   color: hsl(0deg, 0%, 52%);
 }
-section .container #countries .card .country_info .region {
+section .container #countries .card .region {
   color: hsl(0deg, 0%, 52%);
 }
-section .container #countries .card .country_info .capital {
+section .container #countries .card .capital {
   color: hsl(0deg, 0%, 52%);
 }
 section .container #pagination {
   display: flex;
   max-width: 90%;
   justify-content: center;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
   gap: 5px;
 }
 section .container #pagination button {
@@ -103,9 +107,38 @@ section .container #pagination button {
   cursor: pointer;
   outline: none;
   border: none;
+  border-radius: 5px;
   background-color: hsl(0deg, 0%, 85%);
+}
+section .container #pagination button img {
+  fill: white;
 }
 
 .active {
   background: cyan !important;
+}
+
+.dark-mode-bg {
+  background: hsl(207deg, 26%, 17%) !important;
+  color: white;
+  box-shadow: none !important;
+}
+
+.dark-btn {
+  color: white;
+  box-shadow: none;
+}
+
+.white-dark-mode-img {
+  filter: invert(100%) sepia(50%) saturate(1352%) hue-rotate(180deg) brightness(119%) contrast(119%);
+}
+
+.dark-bg {
+  background: hsl(209deg, 23%, 22%) !important;
+  box-shadow: none;
+}
+
+.dark-p-btn {
+  background: hsl(207deg, 26%, 17%) !important;
+  color: white;
 }/*# sourceMappingURL=style.css.map */

@@ -8,12 +8,12 @@
 </head>
 <body>
 
-    <header>
+    <header id="header">
         <div class="container">
             <h1>Where in the world?</h1>
 
-            <button>
-                <img src="/assets/images/moon-solid.svg" alt="">
+            <button id="dark-mode-btn" onclick="DarkMode()">
+                <img id="dm-img" src="/assets/images/moon-solid.svg" alt="">
                 <h2>Dark Mode</h2>
             </button>
         </div>
@@ -21,16 +21,17 @@
 
     <section>
         <div class="container">
-            <div class="inputs">
-                <input type="search" placeholder="Search for a country" name="search">
+            <div class="inputs-cont">
+                <input class="inputs" type="search" placeholder="Search for a country" name="search">
 
-                <select required>
-                    <option disabled selected hidden>Filter By Region</option>
-                    <option value="Africa">Africa</option>
-                    <option value="America">America</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Europe">Europe</option>
-                    <option value="Oceania">Oceania</option>
+                <select class="inputs" required id="region" onchange="FilterByRegion()">
+                   
+                    <option class="filter-opt" value="all">All</option>
+                    <option class="filter-opt" value="Africa">Africa</option>
+                    <option class="filter-opt" value="America">America</option>
+                    <option class="filter-opt" value="Asia">Asia</option>
+                    <option class="filter-opt" value="Europe">Europe</option>
+                    <option class="filter-opt" value="Oceania">Oceania</option>
                 </select>
 
             </div>
