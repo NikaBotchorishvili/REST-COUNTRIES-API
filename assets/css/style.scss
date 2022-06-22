@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+}
+@mixin container {
+    max-width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    place-items: center;
+    margin: 20px auto 0px auto;
+    padding-bottom: 20px;
+}
+
+
+body{
+    background-color:  hsl(0, 0%, 98%);
+}
+header{
+    background-color: hsl(0, 0%, 100%);
+    box-shadow: 0px 3px 1px hsl(0, 0%, 90%);
+    .container{
+        @include container();
+        button{
+            background: none;
+            display: flex;
+            align-content: center;
+            padding: 10px;
+            border: none;
+            gap: 10px;
+            cursor: pointer;
+            img{
+                width: 2rem;
+            }
+        }
+    }
+}
+
+section{
+
+    .container{
+        
+        .inputs{
+            place-items: center;
+            @include container();
+            input[name=search]{
+                width: 300px;
+                padding: 15px 10px;
+                border: none;
+                border-radius: 5px;
+                box-shadow: 0 0 7px hsl(0, 0%, 70%);
+            }
+
+            select{
+                padding: 15px 30px;
+                border: none;
+                border-radius: 5px;
+                box-shadow: 0 0 7px hsl(0, 0%, 70%);
+
+            }
+        }
+
+        #countries{
+            display: grid;
+            max-width: 90vw;
+            margin: 0 auto;
+            place-items: center;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            
+            .card{
+                height: max-content;
+                background-color: hsl(0, 0%, 100%);
+                box-shadow: 2px 1px 10px hsl(0, 0%, 90%);
+                padding-bottom: 20px;
+                .country_info{
+                    margin-left: 20px;
+                    .country_name{
+                        margin-bottom: 8px;
+                    }
+        
+                    .population{
+                        color:  hsl(0, 0%, 52%)
+                    }
+        
+                    .region{
+                        color:  hsl(0, 0%, 52%)
+                    }
+        
+                    .capital{
+                        color:  hsl(0, 0%, 52%)
+                    }
+                }
+            }
+        }
+        #pagination{
+            display: flex;
+            max-width: 90%;
+
+            justify-content: center;
+            margin: 0 auto;
+            gap: 5px;
+            button{
+                padding: 10px;
+                background: none;
+                cursor: pointer;
+                outline: none;
+                border: none;
+                background-color: hsl(0, 0%, 85%);
+             
+            }
+        }
+    }
+}
+
+.active{
+    background: cyan !important ;
+}
