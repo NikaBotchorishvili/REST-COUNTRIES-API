@@ -57,8 +57,7 @@ section{
                 border: none;
                 border-radius: 5px;
                 box-shadow: 0 0 7px hsl(0, 0%, 70%);
-                color: white;
-            }
+                }
 
             select{
                 padding: 15px 30px;
@@ -90,6 +89,10 @@ section{
                     height: 200px;
                 }
                 .country_name{
+                    font-size: 1.5rem;
+                    font-weight: 800;
+                    text-decoration: none;
+                    color: black;
                     margin: 10px 0 8px 0;
                 }
     
@@ -155,4 +158,8 @@ section{
 .dark-p-btn{
     background: $dark-mode-background !important;
     color: white;
+}
+
+.white{
+    color: white !important;
 }

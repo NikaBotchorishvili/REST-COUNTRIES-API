@@ -7,12 +7,12 @@
 }
 
 body {
-  background-color: hsl(0deg, 0%, 98%);
+  background-color: hsl(0, 0%, 98%);
 }
 
 header {
-  background-color: hsl(0deg, 0%, 100%);
-  box-shadow: 0px 3px 1px hsl(0deg, 0%, 90%);
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: 0px 3px 1px hsl(0, 0%, 90%);
 }
 header .container {
   max-width: 90%;
@@ -51,14 +51,13 @@ section .container .inputs-cont input[name=search] {
   padding: 15px 10px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 7px hsl(0deg, 0%, 70%);
-  color: white;
+  box-shadow: 0 0 7px hsl(0, 0%, 70%);
 }
 section .container .inputs-cont select {
   padding: 15px 30px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 7px hsl(0deg, 0%, 70%);
+  box-shadow: 0 0 7px hsl(0, 0%, 70%);
 }
 section .container #countries {
   display: flex;
@@ -71,8 +70,8 @@ section .container #countries {
 }
 section .container #countries .card {
   height: 350;
-  background-color: hsl(0deg, 0%, 100%);
-  box-shadow: 2px 1px 10px hsl(0deg, 0%, 90%);
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: 2px 1px 10px hsl(0, 0%, 90%);
   padding-bottom: 30px;
   width: 300px;
   border-radius: 10px;
@@ -83,16 +82,20 @@ section .container #countries .card img {
   height: 200px;
 }
 section .container #countries .card .country_name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: black;
   margin: 10px 0 8px 0;
 }
 section .container #countries .card .population {
-  color: hsl(0deg, 0%, 52%);
+  color: hsl(0, 0%, 52%);
 }
 section .container #countries .card .region {
-  color: hsl(0deg, 0%, 52%);
+  color: hsl(0, 0%, 52%);
 }
 section .container #countries .card .capital {
-  color: hsl(0deg, 0%, 52%);
+  color: hsl(0, 0%, 52%);
 }
 section .container #pagination {
   display: flex;
@@ -108,7 +111,7 @@ section .container #pagination button {
   outline: none;
   border: none;
   border-radius: 5px;
-  background-color: hsl(0deg, 0%, 85%);
+  background-color: hsl(0, 0%, 85%);
 }
 section .container #pagination button img {
   fill: white;
@@ -119,7 +122,7 @@ section .container #pagination button img {
 }
 
 .dark-mode-bg {
-  background: hsl(207deg, 26%, 17%) !important;
+  background: hsl(207, 26%, 17%) !important;
   color: white;
   box-shadow: none !important;
 }
@@ -134,11 +137,15 @@ section .container #pagination button img {
 }
 
 .dark-bg {
-  background: hsl(209deg, 23%, 22%) !important;
+  background: hsl(209, 23%, 22%) !important;
   box-shadow: none;
 }
 
 .dark-p-btn {
-  background: hsl(207deg, 26%, 17%) !important;
+  background: hsl(207, 26%, 17%) !important;
   color: white;
+}
+
+.white {
+  color: white !important;
 }/*# sourceMappingURL=style.css.map */
