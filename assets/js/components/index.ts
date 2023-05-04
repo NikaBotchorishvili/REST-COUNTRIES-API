@@ -27,19 +27,21 @@ type data = {
 	unMember: boolean;
 };
 
-
 const countriesEl = document.querySelector("#countries") as HTMLElement;
 const paginationEl = document.querySelector("#pagination") as HTMLElement; 
 const body = document.querySelector("body") as HTMLElement;
 const regionInputElement = document.querySelector("#region") as HTMLSelectElement;
-
-
+const colorSchemeBtn = document.querySelector(
+	".color-scheme-btn"
+) as HTMLElement;
 let current_page = 1;
 let rows = 20;
 
-let darkMode = false;
-let data: data[] = [];
 const regionValues = ["Africa", "America", "Asia", "Australia", "Europe"];
+
+colorSchemeBtn.addEventListener("click", () => {
+	darkMode()
+})
 
 regionInputElement.addEventListener("change", () => {
 	init();
@@ -113,7 +115,7 @@ const DisplayCountries = (data: data[], rows_per_page: number, page: number) => 
 			countryCapitalEl
 		);
 		card.append(countryFlagEl, countryInfoEl);
-		DarkMode()
+		darkMode()
 		countriesEl.appendChild(card);
 	}
 };
@@ -151,11 +153,8 @@ const PaginationButton = (page: number, items: data[]) => {
 	return button;
 };
 
-const DarkMode = () => {
+const darkMode = () => {
 	const header = document.querySelector(".header") as HTMLElement;
-	const colorSchemeBtn = document.querySelector(
-		".color-scheme-btn"
-	) as HTMLElement;
 	const colorSchemeModeImage = document.querySelector(
 		".color-scheme-image"
 	) as HTMLElement;
@@ -167,13 +166,20 @@ const DarkMode = () => {
 		btn.classList.toggle("dark-p-btn");
 	});
 	cards.forEach((card) => {
-		let countryName = card.querySelector(".country_name") as HTMLElement
-		if(darkMode){
+		let elements = [
+			card.querySelector(".country_name") as HTMLElement,
+			card.querySelector(".population") as HTMLElement,
+			card.querySelector(".region") as HTMLElement,
+			card.querySelector(".capital") as HTMLElement,
+		]
+		if(isDarkMode){
 			card.classList.remove("dark-mode-bg");
-			countryName.classList.remove("white")
+			elements.forEach((element) => element.classList.remove("white"))
+			
 		}else{
 			card.classList.add("dark-mode-bg");
-			countryName.classList.add("white")
+			elements.forEach((element) => element.classList.add("white"))
+
 		}
 
 	});
@@ -187,5 +193,5 @@ const DarkMode = () => {
 	header.classList.toggle("dark-mode-bg");
 	colorSchemeBtn.classList.toggle("dark-btn");
 	colorSchemeModeImage.classList.toggle("white-dark-mode-img");
-	darkMode = !darkMode;
+	isDarkMode = !isDarkMode;
 };

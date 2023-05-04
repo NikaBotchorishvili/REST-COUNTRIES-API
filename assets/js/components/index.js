@@ -2,11 +2,17 @@
 const countriesEl = document.querySelector("#countries");
 const paginationEl = document.querySelector("#pagination");
 const body = document.querySelector("body");
+const regionInputElement = document.querySelector("#region");
+const colorSchemeBtn = document.querySelector(".color-scheme-btn");
 let current_page = 1;
 let rows = 20;
-let darkMode = false;
-let data = [];
 const regionValues = ["Africa", "America", "Asia", "Australia", "Europe"];
+colorSchemeBtn.addEventListener("click", () => {
+    darkMode();
+});
+regionInputElement.addEventListener("change", () => {
+    init();
+});
 const init = () => {
     const filterInputElement = document.getElementById("region");
     let filterInputValue = filterInputElement.value;
@@ -54,7 +60,7 @@ const DisplayCountries = (data, rows_per_page, page) => {
         countryCapitalEl.innerText = "Capital: " + countryCapital;
         countryInfoEl.append(countryNameEl, countryPopulationEl, countryRegionEl, countryCapitalEl);
         card.append(countryFlagEl, countryInfoEl);
-        DarkMode();
+        darkMode();
         countriesEl.appendChild(card);
     }
 };
@@ -81,9 +87,8 @@ const PaginationButton = (page, items) => {
     });
     return button;
 };
-const DarkMode = () => {
+const darkMode = () => {
     const header = document.querySelector(".header");
-    const colorSchemeBtn = document.querySelector(".color-scheme-btn");
     const colorSchemeModeImage = document.querySelector(".color-scheme-image");
     const cards = document.querySelectorAll(".card");
     const inputs = document.querySelectorAll(".inputs");
@@ -92,14 +97,19 @@ const DarkMode = () => {
         btn.classList.toggle("dark-p-btn");
     });
     cards.forEach((card) => {
-        let countryName = card.querySelector(".country_name");
-        if (darkMode) {
+        let elements = [
+            card.querySelector(".country_name"),
+            card.querySelector(".population"),
+            card.querySelector(".region"),
+            card.querySelector(".capital"),
+        ];
+        if (isDarkMode) {
             card.classList.remove("dark-mode-bg");
-            countryName.classList.remove("white");
+            elements.forEach((element) => element.classList.remove("white"));
         }
         else {
             card.classList.add("dark-mode-bg");
-            countryName.classList.add("white");
+            elements.forEach((element) => element.classList.add("white"));
         }
     });
     inputs.forEach((e) => {
@@ -109,5 +119,5 @@ const DarkMode = () => {
     header.classList.toggle("dark-mode-bg");
     colorSchemeBtn.classList.toggle("dark-btn");
     colorSchemeModeImage.classList.toggle("white-dark-mode-img");
-    darkMode = !darkMode;
+    isDarkMode = !isDarkMode;
 };

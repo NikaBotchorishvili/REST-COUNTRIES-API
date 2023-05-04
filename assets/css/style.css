@@ -81,21 +81,27 @@ section .container #countries .card img {
   width: 300px;
   height: 200px;
 }
-section .container #countries .card .country_name {
+section .container #countries .card .country_info {
+  padding: 15px;
+}
+section .container #countries .card .country_info .country_name {
   font-size: 1.5rem;
   font-weight: 800;
   text-decoration: none;
   color: black;
   margin: 10px 0 8px 0;
 }
-section .container #countries .card .population {
-  color: hsl(0, 0%, 52%);
+section .container #countries .card .country_info .population {
+  font-weight: 600;
+  color: hsl(200, 15%, 8%);
 }
-section .container #countries .card .region {
-  color: hsl(0, 0%, 52%);
+section .container #countries .card .country_info .region {
+  font-weight: 600;
+  color: hsl(200, 15%, 8%);
 }
-section .container #countries .card .capital {
-  color: hsl(0, 0%, 52%);
+section .container #countries .card .country_info .capital {
+  font-weight: 600;
+  color: hsl(200, 15%, 8%);
 }
 section .container #pagination {
   display: flex;
