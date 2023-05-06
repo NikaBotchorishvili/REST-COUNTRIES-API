@@ -164,6 +164,13 @@ section .container #pagination button img {
   flex-wrap: wrap;
   gap: 40px;
 }
+.details .details-container .details-info-container .details-info .details-col div {
+  display: flex;
+  gap: 10px;
+}
+.details .details-container .details-info-container .details-info .details-col div span:first-child {
+  font-weight: 600;
+}
 .details .details-container .details-info-container .details-border-countries-container {
   display: flex;
   gap: 40px;

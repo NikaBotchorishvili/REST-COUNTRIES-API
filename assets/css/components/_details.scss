@@ -19,7 +19,7 @@
 	}
 	.details-container {
 		display: flex;
-		justify-content: space-between;	
+		justify-content: space-between;
 		flex-wrap: wrap;
 		width: 100%;
 		.details-flag {
@@ -41,6 +41,17 @@
 				justify-content: space-between;
 				flex-wrap: wrap;
 				gap: 40px;
+				.details-col {
+					div {
+						display: flex;
+						gap: 10px;
+						span{
+							&:first-child{
+								font-weight: 600;
+							}
+						}
+					}
+				}
 			}
 			.details-border-countries-container {
 				display: flex;
@@ -56,8 +67,8 @@
 						padding: 5px 15px;
 						color: black;
 						text-decoration: none;
-						&:hover{
-							outline: 1px solid black;	
+						&:hover {
+							outline: 1px solid black;
 						}
 					}
 				}

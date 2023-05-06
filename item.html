@@ -9,6 +9,9 @@
 			src="https://kit.fontawesome.com/22dd663c7d.js"
 			crossorigin="anonymous"
 		></script>
+		<script>
+			let FF_FOUC_FIX;
+		</script>
 		<link rel="stylesheet" href="./assets/css/style.css" />
 	</head>
 	<body>
@@ -31,42 +34,45 @@
 				<i class="fa-solid fa-arrow-left"></i>
 				<span>Back</span>
 			</button>
-			<article class="details-container">
-				<span class="details-flag">
-					<img src="./assets/images/ge.png" />
-				</span>
-				<span class="details-info-container">
-					<div class="country_name">
-						<h1>Georgia</h1>
-					</div>
-					<div class="details-info">
-						<div class="details-col col-1">
-							<p>Native Name: <span>Saqartvelo</span></p>
-							<p>Population: <span>4501234</span></p>
-							<p>Region: <span>Asia</span></p>
-							<p>Region: <span>the Piedmont</span></p>
-							<p>Capital: <span>Tbilisi</span></p>
-						</div>
-						<div class="details-col col-2">
-							<p>Top Level Domain: <span>ge</span></p>
-							<p>Currencies: <span>Lari</span></p>
-							<p>Language: <span>Georgian/qartuli</span></p>
-						</div>
-					</div>
-					<div class="details-border-countries-container">
-						<h2>Border Countries:</h2>
-						<span class="details-border-countries">
-							<a href="#">Turkey</a >
-							<a href="#">Russia</a >
-							<a href="#">Azerbaijan</a >
-						</span>
-					</div>
-				</span>
-			</article>
+			<article class="details-container"></article>
 		</main>
 		<footer>
-			<script src="./assets/js/common/common.js"></script>
-			<script src="./assets/js/components/details.js"></script>
+			<script
+				type="module"
+				src="./assets/js/components/details.js"
+			></script>
 		</footer>
 	</body>
 </html>
+
+
+<!-- <span class="details-flag">
+	<img src="./assets/images/ge.png" />
+</span>
+<span class="details-info-container">
+	<div class="country_name">
+		<h1>Georgia</h1>
+	</div>
+	<div class="details-info">
+		<div class="details-col col-1">
+			<p>Native Name: <span>Saqartvelo</span></p>
+			<p>Population: <span>4501234</span></p>
+			<p>Region: <span>Asia</span></p>
+			<p>Region: <span>the Piedmont</span></p>
+			<p>Capital: <span>Tbilisi</span></p>
+		</div>
+		<div class="details-col col-2">
+			<p>Top Level Domain: <span>ge</span></p>
+			<p>Currencies: <span>Lari</span></p>
+			<p>Language: <span>Georgian/qartuli</span></p>
+		</div>
+	</div>
+	<div class="details-border-countries-container">
+		<h2>Border Countries:</h2>
+		<span class="details-border-countries">
+			<a href="#">Turkey</a>
+			<a href="#">Russia</a>
+			<a href="#">Azerbaijan</a>
+		</span>
+	</div>
+</span> -->

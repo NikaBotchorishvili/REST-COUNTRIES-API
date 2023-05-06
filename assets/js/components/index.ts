@@ -1,31 +1,5 @@
-type data = {
-	altSpellings: string[];
-	area: number;
-	borders: string[];
-	capital: string[];
-	capitalInfo: { latlng: number[] };
-	car: { side: string; signs: string[] };
-	cca2: string;
-	cca3: string;
-	ccn3: string;
-	cioc: string;
-	coatOfArms: { png: string; svg: string };
-	continents: string[];
-	fifa: string;
-	flag: string;
-	flags: { png: string; svg: string; alt: string };
-	independent: boolean;
-	landlocked: boolean;
-	name: { common: string; official: string };
-	population: number;
-	region: string;
-	startOfWeek: string;
-	status: string;
-	subregion: string;
-	timezones: string[];
-	tld: string[];
-	unMember: boolean;
-};
+import { dataType } from "../types/types";
+import { isDarkMode, toggleDarkMode } from "../common/common.js";
 
 const countriesEl = document.querySelector("#countries") as HTMLElement;
 const paginationEl = document.querySelector("#pagination") as HTMLElement;
@@ -39,7 +13,6 @@ const colorSchemeBtn = document.querySelector(
 let current_page = 1;
 let rows = 20;
 
-const regionValues = ["Africa", "America", "Asia", "Australia", "Europe"];
 
 colorSchemeBtn.addEventListener("click", () => {
 	darkMode();
@@ -48,6 +21,7 @@ colorSchemeBtn.addEventListener("click", () => {
 regionInputElement.addEventListener("change", () => {
 	init();
 });
+
 const init = () => {
 	const filterInputElement = document.getElementById(
 		"region"
@@ -61,8 +35,8 @@ const init = () => {
 	)
 		.then((response) => response.json())
 		.then((data) => {
-			DisplayCountries(data, rows, current_page);
-			SetupPagination(data, paginationEl, rows);
+			DisplayCountries(data, rows, current_page, filterInputValue);
+			SetupPagination(data, paginationEl, rows, filterInputValue);
 		})
 		.catch((error) => {
 			console.log(`Error: ${error}`);
@@ -70,11 +44,11 @@ const init = () => {
 };
 
 init();
-
 const DisplayCountries = (
-	data: data[],
+	data: dataType[],
 	rows_per_page: number,
-	page: number
+	page: number,
+	filterInputValue: string
 ) => {
 	countriesEl.innerHTML = "";
 	page--;
@@ -100,7 +74,7 @@ const DisplayCountries = (
 		card.classList.add("card");
 		countryNameEl.classList.add("country_name");
 
-		countryNameEl.href = `item.html?id=${i}`;
+		countryNameEl.href = `item.html?id=${i}&filterType=${filterInputValue}`;
 		countryNameEl.classList.add("white");
 		countryPopulationEl.classList.add("population");
 		countryRegionEl.classList.add("region");
@@ -127,21 +101,22 @@ const DisplayCountries = (
 };
 
 const SetupPagination = (
-	countries: data[],
+	countries: dataType[],
 	wrapper: HTMLElement,
-	rows_per_page: number
+	rows_per_page: number,
+	filterInputValue: string
 ) => {
 	wrapper.innerHTML = "";
 	let page_count = Math.ceil(countries.length / rows_per_page);
 
 	for (let i = 1; i < page_count + 1; i++) {
-		let btn = PaginationButton(i, countries);
+		let btn = PaginationButton(i, countries, filterInputValue);
 
 		wrapper.appendChild(btn);
 	}
 };
 
-const PaginationButton = (page: number, items: data[]) => {
+const PaginationButton = (page: number, items: dataType[], filterInputValue: string) => {
 	let button = document.createElement("button") as HTMLButtonElement;
 	button.classList.add("p-btn");
 	button.innerText += page;
@@ -151,7 +126,7 @@ const PaginationButton = (page: number, items: data[]) => {
 	button.addEventListener("click", () => {
 		current_page = page;
 
-		DisplayCountries(items, rows, page);
+		DisplayCountries(items, rows, page, filterInputValue);
 
 		let currentBtn = document.querySelector(
 			"#pagination button.active"
@@ -200,5 +175,5 @@ const darkMode = () => {
 	header.classList.toggle("dark-mode-bg");
 	colorSchemeBtn.classList.toggle("dark-btn");
 	colorSchemeModeImage.classList.toggle("white-dark-mode-img");
-	isDarkMode = !isDarkMode;
+	toggleDarkMode()
 };

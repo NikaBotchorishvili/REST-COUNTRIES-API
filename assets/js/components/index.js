@@ -1,4 +1,4 @@
-"use strict";
+import { isDarkMode, toggleDarkMode } from "../common/common.js";
 const countriesEl = document.querySelector("#countries");
 const paginationEl = document.querySelector("#pagination");
 const body = document.querySelector("body");
@@ -6,7 +6,6 @@ const regionInputElement = document.querySelector("#region");
 const colorSchemeBtn = document.querySelector(".color-scheme-btn");
 let current_page = 1;
 let rows = 20;
-const regionValues = ["Africa", "America", "Asia", "Australia", "Europe"];
 colorSchemeBtn.addEventListener("click", () => {
     darkMode();
 });
@@ -19,15 +18,15 @@ const init = () => {
     fetch(`https://restcountries.com/v3.1/${filterInputValue == "all" ? "all" : `region/${filterInputValue}`}`)
         .then((response) => response.json())
         .then((data) => {
-        DisplayCountries(data, rows, current_page);
-        SetupPagination(data, paginationEl, rows);
+        DisplayCountries(data, rows, current_page, filterInputValue);
+        SetupPagination(data, paginationEl, rows, filterInputValue);
     })
         .catch((error) => {
         console.log(`Error: ${error}`);
     });
 };
 init();
-const DisplayCountries = (data, rows_per_page, page) => {
+const DisplayCountries = (data, rows_per_page, page, filterInputValue) => {
     countriesEl.innerHTML = "";
     page--;
     let start = rows_per_page * page;
@@ -47,7 +46,7 @@ const DisplayCountries = (data, rows_per_page, page) => {
         let countryRegion = data[i].region;
         card.classList.add("card");
         countryNameEl.classList.add("country_name");
-        countryNameEl.href = `item.html?id=${i}`;
+        countryNameEl.href = `item.html?id=${i}&filterType=${filterInputValue}`;
         countryNameEl.classList.add("white");
         countryPopulationEl.classList.add("population");
         countryRegionEl.classList.add("region");
@@ -64,15 +63,15 @@ const DisplayCountries = (data, rows_per_page, page) => {
         countriesEl.appendChild(card);
     }
 };
-const SetupPagination = (countries, wrapper, rows_per_page) => {
+const SetupPagination = (countries, wrapper, rows_per_page, filterInputValue) => {
     wrapper.innerHTML = "";
     let page_count = Math.ceil(countries.length / rows_per_page);
     for (let i = 1; i < page_count + 1; i++) {
-        let btn = PaginationButton(i, countries);
+        let btn = PaginationButton(i, countries, filterInputValue);
         wrapper.appendChild(btn);
     }
 };
-const PaginationButton = (page, items) => {
+const PaginationButton = (page, items, filterInputValue) => {
     let button = document.createElement("button");
     button.classList.add("p-btn");
     button.innerText += page;
@@ -80,7 +79,7 @@ const PaginationButton = (page, items) => {
         button.classList.add("active");
     button.addEventListener("click", () => {
         current_page = page;
-        DisplayCountries(items, rows, page);
+        DisplayCountries(items, rows, page, filterInputValue);
         let currentBtn = document.querySelector("#pagination button.active");
         currentBtn.classList.remove("active");
         button.classList.add("active");
@@ -119,5 +118,5 @@ const darkMode = () => {
     header.classList.toggle("dark-mode-bg");
     colorSchemeBtn.classList.toggle("dark-btn");
     colorSchemeModeImage.classList.toggle("white-dark-mode-img");
-    isDarkMode = !isDarkMode;
+    toggleDarkMode();
 };
