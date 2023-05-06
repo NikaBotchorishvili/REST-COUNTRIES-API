@@ -44,7 +44,7 @@ const DisplayCountries = (data, rows_per_page, page, filterInputValue) => {
     page--;
     let start = rows_per_page * page;
     let end = start + rows_per_page;
-    for (let i = start; i < end; i++) {
+    for (let i = start; i <= end; i++) {
         let card = document.createElement("div");
         let countryFlagEl = document.createElement("img");
         let countryNameEl = document.createElement("a");
