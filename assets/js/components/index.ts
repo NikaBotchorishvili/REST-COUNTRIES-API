@@ -28,9 +28,11 @@ type data = {
 };
 
 const countriesEl = document.querySelector("#countries") as HTMLElement;
-const paginationEl = document.querySelector("#pagination") as HTMLElement; 
+const paginationEl = document.querySelector("#pagination") as HTMLElement;
 const body = document.querySelector("body") as HTMLElement;
-const regionInputElement = document.querySelector("#region") as HTMLSelectElement;
+const regionInputElement = document.querySelector(
+	"#region"
+) as HTMLSelectElement;
 const colorSchemeBtn = document.querySelector(
 	".color-scheme-btn"
 ) as HTMLElement;
@@ -40,12 +42,12 @@ let rows = 20;
 const regionValues = ["Africa", "America", "Asia", "Australia", "Europe"];
 
 colorSchemeBtn.addEventListener("click", () => {
-	darkMode()
-})
+	darkMode();
+});
 
 regionInputElement.addEventListener("change", () => {
 	init();
-})
+});
 const init = () => {
 	const filterInputElement = document.getElementById(
 		"region"
@@ -69,7 +71,11 @@ const init = () => {
 
 init();
 
-const DisplayCountries = (data: data[], rows_per_page: number, page: number) => {
+const DisplayCountries = (
+	data: data[],
+	rows_per_page: number,
+	page: number
+) => {
 	countriesEl.innerHTML = "";
 	page--;
 
@@ -95,7 +101,7 @@ const DisplayCountries = (data: data[], rows_per_page: number, page: number) => 
 		countryNameEl.classList.add("country_name");
 
 		countryNameEl.href = `item.html?id=${i}`;
-		countryNameEl.classList.add("white")
+		countryNameEl.classList.add("white");
 		countryPopulationEl.classList.add("population");
 		countryRegionEl.classList.add("region");
 		countryCapitalEl.classList.add("capital");
@@ -115,12 +121,16 @@ const DisplayCountries = (data: data[], rows_per_page: number, page: number) => 
 			countryCapitalEl
 		);
 		card.append(countryFlagEl, countryInfoEl);
-		darkMode()
+		darkMode();
 		countriesEl.appendChild(card);
 	}
 };
 
-const SetupPagination = (countries: data[], wrapper: HTMLElement, rows_per_page: number) => {
+const SetupPagination = (
+	countries: data[],
+	wrapper: HTMLElement,
+	rows_per_page: number
+) => {
 	wrapper.innerHTML = "";
 	let page_count = Math.ceil(countries.length / rows_per_page);
 
@@ -171,17 +181,14 @@ const darkMode = () => {
 			card.querySelector(".population") as HTMLElement,
 			card.querySelector(".region") as HTMLElement,
 			card.querySelector(".capital") as HTMLElement,
-		]
-		if(isDarkMode){
+		];
+		if (isDarkMode) {
 			card.classList.remove("dark-mode-bg");
-			elements.forEach((element) => element.classList.remove("white"))
-			
-		}else{
+			elements.forEach((element) => element.classList.remove("white"));
+		} else {
 			card.classList.add("dark-mode-bg");
-			elements.forEach((element) => element.classList.add("white"))
-
+			elements.forEach((element) => element.classList.add("white"));
 		}
-
 	});
 
 	inputs.forEach((e) => {
