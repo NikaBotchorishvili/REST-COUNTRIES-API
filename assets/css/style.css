@@ -123,6 +123,102 @@ section .container #pagination button img {
   fill: white;
 }
 
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 50px auto 0 auto;
+  width: 90%;
+  gap: 50px;
+}
+.details .back-btn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  box-shadow: 0 0 7px hsl(0, 0%, 70%);
+}
+.details .details-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.details .details-container .details-flag img {
+  width: 40vw;
+}
+.details .details-container .details-info-container {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 50%;
+}
+.details .details-container .details-info-container .details-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.details .details-container .details-info-container .details-border-countries-container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.details .details-container .details-info-container .details-border-countries-container .details-border-countries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.details .details-container .details-info-container .details-border-countries-container .details-border-countries a {
+  font-size: 1.1rem;
+  box-shadow: 0px 0px 3px hsl(0, 0%, 52%);
+  padding: 5px 15px;
+  color: black;
+  text-decoration: none;
+}
+.details .details-container .details-info-container .details-border-countries-container .details-border-countries a:hover {
+  outline: 1px solid black;
+}
+
+@media screen and (max-width: 1111px) {
+  .details {
+    margin-top: 30px;
+  }
+  .details .details-container {
+    justify-content: center;
+  }
+  .details .details-container .details-flag img {
+    width: 40vw;
+  }
+  .details .details-container .details-info-container {
+    width: 100%;
+    gap: 20px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .details .details-container {
+    justify-content: center;
+  }
+  .details .details-container .details-flag img {
+    width: 70vw;
+  }
+  .details .details-container .details-info-container .details-border-countries-container {
+    gap: 20px;
+  }
+  .details .details-container .details-info-container .details-border-countries-container .details-border-countries {
+    gap: 20px;
+  }
+  .details .details-container .details-info-container .details-border-countries-container .details-border-countries a {
+    font-size: 1.1rem;
+    box-shadow: 0px 0px 3px hsl(0, 0%, 52%);
+    padding: 5px 15px;
+  }
+}
 .active {
   background: cyan !important;
 }
@@ -154,82 +250,4 @@ section .container #pagination button img {
 
 .white {
   color: white !important;
-}
-
-.details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 100px auto 0 auto;
-  width: 90%;
-  gap: 50px;
-}
-.details .back-btn {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  cursor: pointer;
-  padding: 10px 20px;
-  background: none;
-  border: none;
-  box-shadow: 0 0 7px hsl(0, 0%, 70%);
-}
-.details .details-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.details .details-container .details-flag img {
-  width: 40vw;
-}
-.details .details-container .details-info-container {
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 50%;
-  gap: 30px;
-}
-.details .details-container .details-info-container .details-info {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 40px;
-}
-.details .details-container .details-info-container .details-border-countries-container {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-.details .details-container .details-info-container .details-border-countries-container .details-border-countries {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-.details .details-container .details-info-container .details-border-countries-container .details-border-countries p {
-  font-size: 1.1rem;
-  box-shadow: 0px 0px 3px hsl(0, 0%, 52%);
-  padding: 5px 15px;
-}
-
-@media screen and (max-width: 1111px) {
-  .details .details-container {
-    justify-content: center;
-  }
-  .details .details-container .details-flag img {
-    width: 50vw;
-  }
-  .details .details-container .details-info-container {
-    width: 100%;
-    align-content: center;
-  }
-}
-@media screen and (max-width: 550px) {
-  .details .details-container {
-    justify-content: center;
-  }
-  .details .details-container .details-flag img {
-    width: 70vw;
-  }
 }/*# sourceMappingURL=style.css.map */

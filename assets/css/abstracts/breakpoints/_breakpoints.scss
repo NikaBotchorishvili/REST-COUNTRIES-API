@@ -1,0 +1,49 @@
+@use "../../abstracts/" as a;
+
+@media screen and (max-width: 1111px) {
+	.details {
+		margin-top: 30px;
+
+		.details-container {
+			justify-content: center;
+
+			.details-flag {
+				img {
+					width: 40vw;
+				}
+			}
+			.details-info-container {
+				width: 100%;
+				gap: 20px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.details {
+		.details-container {
+			justify-content: center;
+
+			.details-flag {
+				img {
+					width: 70vw;
+				}
+			}
+			.details-info-container {
+				.details-border-countries-container {
+					gap: 20px;
+
+					.details-border-countries {
+						gap: 20px;
+						a {
+							font-size: 1.1rem;
+							box-shadow: 0px 0px 3px a.$light-mode-input;
+							padding: 5px 15px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,34 @@
+@use "../colors/colors";
+.active {
+	background: cyan !important ;
+}
+
+.dark-mode-bg {
+	background: colors.$dark-mode-background !important;
+	color: white;
+	box-shadow: none !important;
+}
+
+.dark-btn {
+	color: white;
+	box-shadow: none;
+}
+
+.white-dark-mode-img {
+	filter: invert(100%) sepia(50%) saturate(1352%) hue-rotate(180deg)
+		brightness(119%) contrast(119%);
+}
+
+.dark-bg {
+	background: colors.$dark-mode-body-background !important;
+	box-shadow: none;
+}
+
+.dark-p-btn {
+	background: colors.$dark-mode-background !important;
+	color: white;
+}
+
+.white {
+	color: white !important;
+}

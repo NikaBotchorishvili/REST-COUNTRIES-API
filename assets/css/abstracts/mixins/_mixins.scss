@@ -1,0 +1,9 @@
+@mixin container {
+	max-width: 90%;
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	place-items: center;
+	margin: 0 auto 0px auto;
+	padding: 20px 0;
+}
