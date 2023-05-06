@@ -5,14 +5,27 @@ section {
 		.inputs-cont {
 			place-items: center;
 			@include a.container();
-			input[name="search"] {
-				width: 300px;
-				padding: 15px 10px;
-				border: none;
-				border-radius: 5px;
-				box-shadow: 0 0 7px hsl(0, 0%, 70%);
+			.search-bar{
+				display: flex;
+				align-items: center;
+				position: relative;
+				input[name="search"] {
+					padding: 15px 50px;
+					border: none;
+					border-radius: 10px;
+					box-shadow: 0 0 7px hsl(0, 0%, 70%);
+				}
+				
+				button{
+					border: none;
+					scale: 1.5;
+					position: absolute;
+					left: 20px;
+					background: none;
+					color: a.$light-mode-input;
+					cursor: pointer;
+				}
 			}
-
 			select {
 				padding: 15px 30px;
 				border: none;

@@ -46,12 +46,25 @@ section .container .inputs-cont {
   margin: 0 auto 0px auto;
   padding: 20px 0;
 }
-section .container .inputs-cont input[name=search] {
-  width: 300px;
-  padding: 15px 10px;
+section .container .inputs-cont .search-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+section .container .inputs-cont .search-bar input[name=search] {
+  padding: 15px 50px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 0 7px hsl(0, 0%, 70%);
+}
+section .container .inputs-cont .search-bar button {
+  border: none;
+  scale: 1.5;
+  position: absolute;
+  left: 20px;
+  background: none;
+  color: hsl(0, 0%, 52%);
+  cursor: pointer;
 }
 section .container .inputs-cont select {
   padding: 15px 30px;

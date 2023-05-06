@@ -1,5 +1,4 @@
 import { dataType } from "../types/types";
-import { isDarkMode, toggleDarkMode } from "../common/common.js";
 
 const countriesEl = document.querySelector("#countries") as HTMLElement;
 const paginationEl = document.querySelector("#pagination") as HTMLElement;
@@ -10,10 +9,29 @@ const regionInputElement = document.querySelector(
 const colorSchemeBtn = document.querySelector(
 	".color-scheme-btn"
 ) as HTMLElement;
+const searchInputElement = document.querySelector(
+	"input[name=search]"
+) as HTMLInputElement;
+const searchSubmitElement = document.querySelector(
+	".search-submit"
+) as HTMLButtonElement;
+
 let current_page = 1;
 let rows = 20;
-
-
+let isDarkMode = false;
+searchSubmitElement.addEventListener("click", (e) => {
+	e.preventDefault();
+	let searchInputValue = searchInputElement.value.trim();
+	if (searchInputValue.trim() != "") {
+		fetch(
+			`https://restcountries.com/v3.1/name/${searchInputValue}?fullText=true`
+		).then((response) => response.json())
+		 .then((data) => {
+			DisplayCountries(data, rows, current_page);
+			SetupPagination(data, paginationEl, rows);
+		})
+	}
+});
 colorSchemeBtn.addEventListener("click", () => {
 	darkMode();
 });
@@ -44,11 +62,11 @@ const init = () => {
 };
 
 init();
-const DisplayCountries = (
+const DisplayCountries = (	
 	data: dataType[],
 	rows_per_page: number,
 	page: number,
-	filterInputValue: string
+	filterInputValue?: string
 ) => {
 	countriesEl.innerHTML = "";
 	page--;
@@ -104,7 +122,7 @@ const SetupPagination = (
 	countries: dataType[],
 	wrapper: HTMLElement,
 	rows_per_page: number,
-	filterInputValue: string
+	filterInputValue?: string
 ) => {
 	wrapper.innerHTML = "";
 	let page_count = Math.ceil(countries.length / rows_per_page);
@@ -116,7 +134,11 @@ const SetupPagination = (
 	}
 };
 
-const PaginationButton = (page: number, items: dataType[], filterInputValue: string) => {
+const PaginationButton = (
+	page: number,
+	items: dataType[],
+	filterInputValue?: string
+) => {
 	let button = document.createElement("button") as HTMLButtonElement;
 	button.classList.add("p-btn");
 	button.innerText += page;
@@ -145,10 +167,15 @@ const darkMode = () => {
 	) as HTMLElement;
 	const cards = document.querySelectorAll(".card");
 	const inputs = document.querySelectorAll(".inputs");
-	const paginationBtns = document.querySelectorAll(".p-btn");
+	const paginationButtons = document.querySelectorAll(".p-btn");
 
-	paginationBtns.forEach((btn) => {
-		btn.classList.toggle("dark-p-btn");
+	paginationButtons.forEach((btn) => {
+		if(isDarkMode){
+			btn.classList.remove("dark-p-btn");
+		}else{
+			btn.classList.add("dark-p-btn");
+
+		}
 	});
 	cards.forEach((card) => {
 		let elements = [
@@ -167,13 +194,22 @@ const darkMode = () => {
 	});
 
 	inputs.forEach((e) => {
-		e.classList.toggle("dark-mode-bg");
+		if(isDarkMode){
+			e.classList.remove("dark-mode-bg");
+		}else{
+			e.classList.add("dark-mode-bg");
+		}
 	});
-
-	body.classList.toggle("dark-bg");
-
-	header.classList.toggle("dark-mode-bg");
-	colorSchemeBtn.classList.toggle("dark-btn");
-	colorSchemeModeImage.classList.toggle("white-dark-mode-img");
-	toggleDarkMode()
+	if(isDarkMode){
+		body.classList.remove("dark-bg");
+		header.classList.remove("dark-mode-bg");
+		colorSchemeBtn.classList.remove("dark-btn");
+		colorSchemeModeImage.classList.remove("white-dark-mode-img");
+	}else{
+		body.classList.add("dark-bg");
+		header.classList.add("dark-mode-bg");
+		colorSchemeBtn.classList.add("dark-btn");
+		colorSchemeModeImage.classList.add("white-dark-mode-img");
+	}
+	isDarkMode = !isDarkMode
 };
