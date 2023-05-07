@@ -18,7 +18,7 @@ const searchSubmitElement = document.querySelector(
 
 let current_page = 1;
 let rows = 20;
-let isDarkMode = false;
+let isDarkMode = true;
 searchSubmitElement.addEventListener("click", (e) => {
 	e.preventDefault();
 	let searchInputValue = searchInputElement.value.trim();
@@ -33,7 +33,9 @@ searchSubmitElement.addEventListener("click", (e) => {
 	}
 });
 colorSchemeBtn.addEventListener("click", () => {
+	isDarkMode = !isDarkMode
 	darkMode();
+
 });
 
 regionInputElement.addEventListener("change", () => {
@@ -74,8 +76,7 @@ const DisplayCountries = (
 	let start = rows_per_page * page;
 	let end = start + rows_per_page;
 
-	for (let i = start; i <= end; i++) {
-
+	for (let i = start; i < end; i++) {
 		let card = document.createElement("div");
 		let countryFlagEl = document.createElement("img");
 		let countryNameEl = document.createElement("a");
@@ -114,8 +115,8 @@ const DisplayCountries = (
 			countryCapitalEl
 		);
 		card.append(countryFlagEl, countryInfoEl);
-		darkMode();
 		countriesEl.appendChild(card);
+		darkMode();
 	}
 };
 
@@ -201,8 +202,10 @@ const darkMode = () => {
 			e.classList.add("dark-mode-bg");
 		}
 	});
+	
 	if(isDarkMode){
 		body.classList.remove("dark-bg");
+
 		header.classList.remove("dark-mode-bg");
 		colorSchemeBtn.classList.remove("dark-btn");
 		colorSchemeModeImage.classList.remove("white-dark-mode-img");
@@ -212,5 +215,4 @@ const darkMode = () => {
 		colorSchemeBtn.classList.add("dark-btn");
 		colorSchemeModeImage.classList.add("white-dark-mode-img");
 	}
-	isDarkMode = !isDarkMode
 };

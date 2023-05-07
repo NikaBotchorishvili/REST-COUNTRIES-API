@@ -7,7 +7,7 @@ const searchInputElement = document.querySelector("input[name=search]");
 const searchSubmitElement = document.querySelector(".search-submit");
 let current_page = 1;
 let rows = 20;
-let isDarkMode = false;
+let isDarkMode = true;
 searchSubmitElement.addEventListener("click", (e) => {
     e.preventDefault();
     let searchInputValue = searchInputElement.value.trim();
@@ -20,6 +20,7 @@ searchSubmitElement.addEventListener("click", (e) => {
     }
 });
 colorSchemeBtn.addEventListener("click", () => {
+    isDarkMode = !isDarkMode;
     darkMode();
 });
 regionInputElement.addEventListener("change", () => {
@@ -44,7 +45,7 @@ const DisplayCountries = (data, rows_per_page, page, filterInputValue) => {
     page--;
     let start = rows_per_page * page;
     let end = start + rows_per_page;
-    for (let i = start; i <= end; i++) {
+    for (let i = start; i < end; i++) {
         let card = document.createElement("div");
         let countryFlagEl = document.createElement("img");
         let countryNameEl = document.createElement("a");
@@ -72,8 +73,8 @@ const DisplayCountries = (data, rows_per_page, page, filterInputValue) => {
         countryCapitalEl.innerText = "Capital: " + countryCapital;
         countryInfoEl.append(countryNameEl, countryPopulationEl, countryRegionEl, countryCapitalEl);
         card.append(countryFlagEl, countryInfoEl);
-        darkMode();
         countriesEl.appendChild(card);
+        darkMode();
     }
 };
 const SetupPagination = (countries, wrapper, rows_per_page, filterInputValue) => {
@@ -149,6 +150,5 @@ const darkMode = () => {
         colorSchemeBtn.classList.add("dark-btn");
         colorSchemeModeImage.classList.add("white-dark-mode-img");
     }
-    isDarkMode = !isDarkMode;
 };
 export {};

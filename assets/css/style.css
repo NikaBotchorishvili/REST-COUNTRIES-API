@@ -84,7 +84,6 @@ section .container #countries {
 section .container #countries .card {
   height: 350;
   background-color: hsl(0, 0%, 100%);
-  box-shadow: 2px 1px 10px hsl(0, 0%, 90%);
   padding-bottom: 30px;
   width: 300px;
   border-radius: 10px;
