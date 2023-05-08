@@ -267,5 +267,9 @@ section .container #pagination button img {
 }
 
 .white {
-  color: white !important;
+  color: hsl(0, 0%, 100%) !important;
+}
+
+.white-outline {
+  outline-color: hsl(0, 0%, 100%) !important;
 }/*# sourceMappingURL=style.css.map */

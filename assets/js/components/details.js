@@ -3,48 +3,54 @@ const detailsContainerElement = document.querySelector(".details-container");
 const colorSchemeBtn = document.querySelector(".color-scheme-btn");
 let isDarkMode = false;
 colorSchemeBtn.addEventListener("click", () => {
-    darkMode();
     isDarkMode = !isDarkMode;
+    darkMode();
 });
 backButtonElement.addEventListener("click", () => {
     window.history.back();
 });
 const init = () => {
     const urlParams = new URLSearchParams(window.location.search);
-    let filterType = urlParams.get("filterType");
-    let id = Number(urlParams.get("id"));
-    fetch(`https://restcountries.com/v3.1/${filterType == "all" ? "all" : `region/${filterType}`}`)
+    let name = urlParams.get("name");
+    fetch("https://restcountries.com/v3.1/all")
         .then((response) => response.json())
         .then((data) => {
-        data = findItem(data, id);
-        document.title = data.name.official;
-        renderDetails(data);
+        if (name) {
+            let item = findItem(data, name);
+            if (item) {
+                document.title = item.name.official;
+                renderDetails(item, data);
+            }
+        }
     })
         .catch((error) => {
         throw error;
     });
 };
 init();
-const findItem = (data, id) => {
-    return data.find((item, index) => {
-        if (index === id) {
+const findItem = (data, name) => {
+    return data.find((item) => {
+        let n = item.name.common.split(" ").join("_");
+        if (n == name) {
             return item;
         }
     });
 };
-const renderDetails = (data) => {
+const renderDetails = (item, data) => {
     const flagContainer = document.createElement("span");
     const flag = document.createElement("img");
-    const detailsInfo = details(data);
-    flag.src = data.flags.svg;
-    flag.alt = data.flags.alt;
+    const detailsInfo = details(item, data);
+    flag.src = item.flags.svg;
+    flag.alt = item.flags.alt;
     flagContainer.classList.add("details-flag");
     flagContainer.appendChild(flag);
+    darkMode();
     detailsContainerElement.append(flagContainer, detailsInfo);
 };
-const details = (data) => {
+const details = (item, data) => {
     const detailsInfoContainer = document.createElement("div");
     const detailsInfo = document.createElement("div");
+    const borderingCountriesContainerElement = document.createElement("div");
     const countryElementContainer = document.createElement("div");
     const countryNameElement = document.createElement("h1");
     const detailsCol1 = document.createElement("div");
@@ -63,21 +69,22 @@ const details = (data) => {
     const regionElement = document.createElement("span");
     const subRegionElement = document.createElement("span");
     const capitalElement = document.createElement("span");
-    countryNameElement.innerText = data.name.official;
+    countryNameElement.innerText = item.name.official;
     nativeNameElementName.innerText = "Native Name:";
-    nativeNameElement.innerText = data.name.common;
+    nativeNameElement.innerText = item.name.common;
     nativeNameContainer.append(nativeNameElementName, nativeNameElement);
     populationElementName.innerText = "Population:";
-    populationElement.innerText = data.population.toString();
+    populationElement.innerText = item.population.toString();
     populationContainer.append(populationElementName, populationElement);
     regionElementName.innerText = "Region:";
-    regionElement.innerText = data.region;
+    regionElement.innerText = item.region;
     regionContainer.append(regionElementName, regionElement);
     subRegionElementName.innerText = "Sub Region:";
-    subRegionElement.innerText = data.subregion;
+    subRegionElement.innerText = item.subregion;
     subRegionContainer.append(subRegionElementName, subRegionElement);
     capitalElementName.innerText = "Capital:";
-    capitalElement.innerText = data.capital.length === 0 ? data.capital[0] : data.capital.join(", ");
+    capitalElement.innerText =
+        item.capital.length === 0 ? item.capital[0] : item.capital.join(", ");
     capitalContainer.append(capitalElementName, capitalElement);
     detailsCol1.append(nativeNameContainer, populationContainer, regionContainer, subRegionContainer, capitalContainer);
     const detailsCol2 = document.createElement("div");
@@ -92,13 +99,13 @@ const details = (data) => {
     const languagesElement = document.createElement("span");
     topLevelDomainElementName.innerText = "Top Level Domain:";
     topLevelDomainElement.innerText =
-        data.tld.length > 1 ? data.tld.join(", ") : data.tld[0];
+        item.tld.length > 1 ? item.tld.join(", ") : item.tld[0];
     topLevelDomainContainer.append(topLevelDomainElementName, topLevelDomainElement);
-    let languages = Object.entries(data.languages).map((l) => l[1]);
+    let languages = Object.entries(item.languages).map((l) => l[1]);
     languagesElementName.innerText = "Languages:";
     languagesElement.innerText = `${languages.length === 1 ? languages[0] : languages.join(", ")}`;
     languagesContainer.append(languagesElementName, languagesElement);
-    let currencies = Object.entries(data.currencies).map((currency) => currency[0]);
+    let currencies = Object.entries(item.currencies).map((currency) => currency[0]);
     currenciesElementName.innerText = "Currencies:";
     currenciesElement.innerText = `${currencies.length === 1 ? currencies[0] : currencies.join(", ")}`;
     currenciesContainer.append(currenciesElementName, currenciesElement);
@@ -110,20 +117,45 @@ const details = (data) => {
     detailsCol2.classList.add("details-col", "col-2");
     detailsInfo.classList.add("details-info");
     countryElementContainer.appendChild(countryNameElement);
-    detailsInfoContainer.append(countryElementContainer, detailsInfo);
+    const borderingHeaderElement = document.createElement("h2");
+    const detailsBorderCountries = document.createElement("span");
+    borderingHeaderElement.innerText = "Border Countries:";
+    borderingCountriesContainerElement.classList.add("details-border-countries-container");
+    detailsBorderCountries.classList.add("details-border-countries");
+    if (item.borders) {
+        data.forEach((it) => {
+            if (item.borders.includes(it.cca3)) {
+                let borderCountryLink = document.createElement("a");
+                borderCountryLink.classList.add("border-link");
+                borderCountryLink.innerText = it.name.common;
+                borderCountryLink.href = `item.html?name=${it.name.common
+                    .split(" ")
+                    .join("_")}`;
+                detailsBorderCountries.appendChild(borderCountryLink);
+            }
+        });
+    }
+    borderingCountriesContainerElement.append(borderingHeaderElement, detailsBorderCountries);
+    detailsInfoContainer.append(countryElementContainer, detailsInfo, borderingCountriesContainerElement);
     return detailsInfoContainer;
 };
 const darkMode = () => {
     const header = document.querySelector(".header");
     const body = document.querySelector("body");
     const colorSchemeModeImage = document.querySelector(".color-scheme-image");
-    if (isDarkMode) {
+    const borderLinks = document.querySelectorAll(".border-link");
+    if (!isDarkMode) {
         header.classList.remove("dark-mode-bg");
         body.classList.remove("dark-bg");
         backButtonElement.classList.remove("dark-btn");
         colorSchemeBtn.classList.remove("dark-btn");
         colorSchemeModeImage.classList.remove("white-dark-mode-img");
         detailsContainerElement.classList.remove("white");
+        borderLinks.forEach((link) => {
+            link.classList.remove("dark-mode-bg");
+            link.classList.remove("white");
+            link.classList.remove("white-outline");
+        });
     }
     else {
         header.classList.add("dark-mode-bg");
@@ -132,6 +164,11 @@ const darkMode = () => {
         colorSchemeModeImage.classList.add("white-dark-mode-img");
         detailsContainerElement.classList.add("white");
         backButtonElement.classList.add("dark-btn");
+        borderLinks.forEach((link) => {
+            link.classList.add("dark-mode-bg");
+            link.classList.add("white");
+            link.classList.add("white-outline");
+        });
     }
 };
 export {};

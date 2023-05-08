@@ -31,5 +31,10 @@
 }
 
 .white {
-	color: white !important;
+
+	color: colors.$dark-text-light-element !important;
+}
+
+.white-outline{
+	outline-color: colors.$dark-text-light-element !important;
 }

@@ -8,14 +8,12 @@ const searchSubmitElement = document.querySelector(".search-submit");
 let current_page = 1;
 let rows = 20;
 let isDarkMode = true;
-document.addEventListener("DOMContentLoaded", () => {
-    isDarkMode = Boolean(localStorage.getItem("darkMode"));
-});
 searchSubmitElement.addEventListener("click", (e) => {
     e.preventDefault();
     let searchInputValue = searchInputElement.value.trim();
     if (searchInputValue.trim() != "") {
-        fetch(`https://restcountries.com/v3.1/name/${searchInputValue}?fullText=true`).then((response) => response.json())
+        fetch(`https://restcountries.com/v3.1/name/${searchInputValue}?fullText=true`)
+            .then((response) => response.json())
             .then((data) => {
             DisplayCountries(data, rows, current_page);
             SetupPagination(data, paginationEl, rows);
@@ -35,20 +33,20 @@ const init = () => {
     fetch(`https://restcountries.com/v3.1/${filterInputValue == "all" ? "all" : `region/${filterInputValue}`}`)
         .then((response) => response.json())
         .then((data) => {
-        DisplayCountries(data, rows, current_page, filterInputValue);
-        SetupPagination(data, paginationEl, rows, filterInputValue);
+        DisplayCountries(data, rows, current_page);
+        SetupPagination(data, paginationEl, rows);
     })
         .catch((error) => {
         console.log(`Error: ${error}`);
     });
 };
 init();
-const DisplayCountries = (data, rows_per_page, page, filterInputValue) => {
+const DisplayCountries = (data, rows_per_page, page) => {
     countriesEl.innerHTML = "";
     page--;
     let start = rows_per_page * page;
     let end = start + rows_per_page;
-    for (let i = start; i < end; i++) {
+    if (data.length == 1) {
         let card = document.createElement("div");
         let countryFlagEl = document.createElement("img");
         let countryNameEl = document.createElement("a");
@@ -56,14 +54,15 @@ const DisplayCountries = (data, rows_per_page, page, filterInputValue) => {
         let countryRegionEl = document.createElement("h5");
         let countryCapitalEl = document.createElement("h5");
         let countryInfoEl = document.createElement("div");
-        let countryImage = data[i].flags.png;
-        let countryName = data[i].name.common;
-        let countryCapital = data[i].capital;
-        let countryPopulation = data[i].population;
-        let countryRegion = data[i].region;
+        console.log("search");
+        let countryImage = data[0].flags.png;
+        let countryName = data[0].name.common;
+        let countryCapital = data[0].capital;
+        let countryPopulation = data[0].population;
+        let countryRegion = data[0].region;
         card.classList.add("card");
         countryNameEl.classList.add("country_name");
-        countryNameEl.href = `item.html?id=${i}&filterType=${filterInputValue}`;
+        countryNameEl.href = `item.html?name=${data[0].name.common.split(" ").join("_")}`;
         countryNameEl.classList.add("white");
         countryPopulationEl.classList.add("population");
         countryRegionEl.classList.add("region");
@@ -79,16 +78,51 @@ const DisplayCountries = (data, rows_per_page, page, filterInputValue) => {
         countriesEl.appendChild(card);
         darkMode();
     }
+    else {
+        for (let i = start; i < end; i++) {
+            let card = document.createElement("div");
+            let countryFlagEl = document.createElement("img");
+            let countryNameEl = document.createElement("a");
+            let countryPopulationEl = document.createElement("h5");
+            let countryRegionEl = document.createElement("h5");
+            let countryCapitalEl = document.createElement("h5");
+            let countryInfoEl = document.createElement("div");
+            let countryImage = data[i].flags.png;
+            let countryName = data[i].name.common;
+            let countryCapital = data[i].capital;
+            let countryPopulation = data[i].population;
+            let countryRegion = data[i].region;
+            card.classList.add("card");
+            countryNameEl.classList.add("country_name");
+            countryNameEl.href = `item.html?name=${data[i].name.common
+                .split(" ")
+                .join("_")}`;
+            countryNameEl.classList.add("white");
+            countryPopulationEl.classList.add("population");
+            countryRegionEl.classList.add("region");
+            countryCapitalEl.classList.add("capital");
+            countryInfoEl.classList.add("country_info");
+            countryFlagEl.src = countryImage;
+            countryNameEl.innerText = countryName;
+            countryPopulationEl.innerHTML = "Population: " + countryPopulation;
+            countryRegionEl.innerHTML = "Region: " + countryRegion;
+            countryCapitalEl.innerText = "Capital: " + countryCapital;
+            countryInfoEl.append(countryNameEl, countryPopulationEl, countryRegionEl, countryCapitalEl);
+            card.append(countryFlagEl, countryInfoEl);
+            darkMode();
+            countriesEl.appendChild(card);
+        }
+    }
 };
-const SetupPagination = (countries, wrapper, rows_per_page, filterInputValue) => {
+const SetupPagination = (countries, wrapper, rows_per_page) => {
     wrapper.innerHTML = "";
     let page_count = Math.ceil(countries.length / rows_per_page);
     for (let i = 1; i < page_count + 1; i++) {
-        let btn = PaginationButton(i, countries, filterInputValue);
+        let btn = PaginationButton(i, countries);
         wrapper.appendChild(btn);
     }
 };
-const PaginationButton = (page, items, filterInputValue) => {
+const PaginationButton = (page, items) => {
     let button = document.createElement("button");
     button.classList.add("p-btn");
     button.innerText += page;
@@ -96,7 +130,7 @@ const PaginationButton = (page, items, filterInputValue) => {
         button.classList.add("active");
     button.addEventListener("click", () => {
         current_page = page;
-        DisplayCountries(items, rows, page, filterInputValue);
+        DisplayCountries(items, rows, page);
         let currentBtn = document.querySelector("#pagination button.active");
         currentBtn.classList.remove("active");
         button.classList.add("active");
