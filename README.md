@@ -39,11 +39,10 @@ Users should be able to:
 ![image](https://user-images.githubusercontent.com/58900787/236882298-e3a6d332-ac79-4436-86c7-f8984d5653d5.png)
 ![image](https://user-images.githubusercontent.com/58900787/236882347-c4c9d10f-c902-4a1b-816a-da27b803a943.png)
 
-
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Solution](https://www.frontendmentor.io/solutions/rest-countries-api-solution-with-scss-and-typescript-KJXiCX-sFM)
+- Live Site URL: [Live site](https://rest-countries-api-git-main-nikabotchorishvili.vercel.app/)
 
 ### Built with
 
@@ -62,7 +61,7 @@ This project was another great one to get my hands dirty with typescript, I lear
 
 ### Useful resources
 
-- [Example resource 1](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type) - This helped me with <Record> uttility type
+- [<Record> utillity type](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type) - This helped me with <Record> utillity type
 
 ## Author
 
