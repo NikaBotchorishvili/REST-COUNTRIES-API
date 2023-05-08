@@ -1,6 +1,5 @@
 // import { isDarkMode, toggleDarkMode } from "../common/common.js";
 import { dataType } from "../types/types.js";
-
 const backButtonElement = document.querySelector(
 	".back-btn"
 ) as HTMLButtonElement;
@@ -9,6 +8,19 @@ const detailsContainerElement = document.querySelector(
 	".details-container"
 ) as HTMLElement;
 
+const colorSchemeBtn = document.querySelector(
+	".color-scheme-btn"
+) as HTMLElement;
+
+
+
+
+let isDarkMode = false;
+
+colorSchemeBtn.addEventListener("click", () => {
+	darkMode();
+	isDarkMode = !isDarkMode;
+})
 backButtonElement.addEventListener("click", () => {
 	window.history.back();
 });
@@ -25,6 +37,8 @@ const init = () => {
 		.then((response) => response.json())
 		.then((data) => {
 			data = findItem(data, id);
+			document.title = data.name.official
+
 			renderDetails(data);
 		})
 		.catch((error) => {
@@ -99,9 +113,8 @@ const details = (data: dataType) => {
 	subRegionElement.innerText = data.subregion;
 	subRegionContainer.append(subRegionElementName, subRegionElement);
 
-	//  I'm going to come back to this later. (multiple capital names cause capital property is an array of strings)
-	capitalElementName.innerText = "Capital";
-	capitalElement.innerText = data.capital[0];
+	capitalElementName.innerText = "Capital:";
+	capitalElement.innerText = data.capital.length === 0? data.capital[0]: data.capital.join(", ");
 	capitalContainer.append(capitalElementName, capitalElement);
 
 	detailsCol1.append(
@@ -127,7 +140,7 @@ const details = (data: dataType) => {
 
 	topLevelDomainElementName.innerText = "Top Level Domain:";
 	topLevelDomainElement.innerText =
-		data.tld.length > 1 ? data.tld.join(",") : data.tld[0];
+		data.tld.length > 1 ? data.tld.join(", ") : data.tld[0];
 	topLevelDomainContainer.append(
 		topLevelDomainElementName,
 		topLevelDomainElement
@@ -143,7 +156,6 @@ const details = (data: dataType) => {
     currenciesElement.innerText = `${currencies.length === 1? currencies[0]: currencies.join(", ")}`
     currenciesContainer.append(currenciesElementName, currenciesElement);
 
-    console.log(data)
 	detailsCol2.append(topLevelDomainContainer, languagesContainer, currenciesContainer);
 
 	detailsInfo.append(detailsCol1, detailsCol2);
@@ -162,11 +174,28 @@ const details = (data: dataType) => {
 	return detailsInfoContainer;
 };
 
-// 	<span class="details-flag"></span>
-// 	<span class="details-info-container">
-// 		<div class="country_name"></div>
-// 		<div class="details-info">
-// 			<div class="details-col col-1"></div>
-// 			<div class="details-col col-2"></div>
-// 		</div>
-// 	</span>
+const darkMode = () => {
+	const header = document.querySelector(".header") as HTMLElement;
+	const body = document.querySelector("body") as HTMLElement;
+	const colorSchemeModeImage = document.querySelector(
+		".color-scheme-image"
+	) as HTMLElement;
+
+
+	if(isDarkMode){
+		header.classList.remove("dark-mode-bg");
+		body.classList.remove("dark-bg");
+		backButtonElement.classList.remove("dark-btn");
+		colorSchemeBtn.classList.remove("dark-btn");
+		colorSchemeModeImage.classList.remove("white-dark-mode-img");
+		detailsContainerElement.classList.remove("white")
+	}else{
+		header.classList.add("dark-mode-bg")
+		body.classList.add("dark-bg");
+		colorSchemeBtn.classList.add("dark-btn");
+		colorSchemeModeImage.classList.add("white-dark-mode-img");
+		detailsContainerElement.classList.add("white")
+
+		backButtonElement.classList.add("dark-btn")
+	}
+}

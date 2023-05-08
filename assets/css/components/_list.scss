@@ -1,5 +1,18 @@
 @use "../abstracts/" as a;
 
+// .skeleton{
+// 	animation: skeleton-loading 1s linear infinite alternate;
+
+
+// @keyframes skeleton-loading {
+// 	0%{
+// 		background-color: hsl(200, 20%, 70%);
+// 	}
+// 	100%{
+// 		background-color: hsl(200, 20%, 95%);
+// 	}
+// }}
+
 section {
 	.container {
 		.inputs-cont {
@@ -40,7 +53,6 @@ section {
 			max-width: 90vw;
 			margin: 0 auto;
 			justify-content: space-evenly;
-			grid-template-columns: repeat(4, 1fr);
 			gap: 20px;
 
 			.card {

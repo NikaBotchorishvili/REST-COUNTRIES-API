@@ -1,5 +1,11 @@
 const backButtonElement = document.querySelector(".back-btn");
 const detailsContainerElement = document.querySelector(".details-container");
+const colorSchemeBtn = document.querySelector(".color-scheme-btn");
+let isDarkMode = false;
+colorSchemeBtn.addEventListener("click", () => {
+    darkMode();
+    isDarkMode = !isDarkMode;
+});
 backButtonElement.addEventListener("click", () => {
     window.history.back();
 });
@@ -11,6 +17,7 @@ const init = () => {
         .then((response) => response.json())
         .then((data) => {
         data = findItem(data, id);
+        document.title = data.name.official;
         renderDetails(data);
     })
         .catch((error) => {
@@ -69,8 +76,8 @@ const details = (data) => {
     subRegionElementName.innerText = "Sub Region:";
     subRegionElement.innerText = data.subregion;
     subRegionContainer.append(subRegionElementName, subRegionElement);
-    capitalElementName.innerText = "Capital";
-    capitalElement.innerText = data.capital[0];
+    capitalElementName.innerText = "Capital:";
+    capitalElement.innerText = data.capital.length === 0 ? data.capital[0] : data.capital.join(", ");
     capitalContainer.append(capitalElementName, capitalElement);
     detailsCol1.append(nativeNameContainer, populationContainer, regionContainer, subRegionContainer, capitalContainer);
     const detailsCol2 = document.createElement("div");
@@ -85,7 +92,7 @@ const details = (data) => {
     const languagesElement = document.createElement("span");
     topLevelDomainElementName.innerText = "Top Level Domain:";
     topLevelDomainElement.innerText =
-        data.tld.length > 1 ? data.tld.join(",") : data.tld[0];
+        data.tld.length > 1 ? data.tld.join(", ") : data.tld[0];
     topLevelDomainContainer.append(topLevelDomainElementName, topLevelDomainElement);
     let languages = Object.entries(data.languages).map((l) => l[1]);
     languagesElementName.innerText = "Languages:";
@@ -95,7 +102,6 @@ const details = (data) => {
     currenciesElementName.innerText = "Currencies:";
     currenciesElement.innerText = `${currencies.length === 1 ? currencies[0] : currencies.join(", ")}`;
     currenciesContainer.append(currenciesElementName, currenciesElement);
-    console.log(data);
     detailsCol2.append(topLevelDomainContainer, languagesContainer, currenciesContainer);
     detailsInfo.append(detailsCol1, detailsCol2);
     countryElementContainer.classList.add("country_name");
@@ -106,5 +112,26 @@ const details = (data) => {
     countryElementContainer.appendChild(countryNameElement);
     detailsInfoContainer.append(countryElementContainer, detailsInfo);
     return detailsInfoContainer;
+};
+const darkMode = () => {
+    const header = document.querySelector(".header");
+    const body = document.querySelector("body");
+    const colorSchemeModeImage = document.querySelector(".color-scheme-image");
+    if (isDarkMode) {
+        header.classList.remove("dark-mode-bg");
+        body.classList.remove("dark-bg");
+        backButtonElement.classList.remove("dark-btn");
+        colorSchemeBtn.classList.remove("dark-btn");
+        colorSchemeModeImage.classList.remove("white-dark-mode-img");
+        detailsContainerElement.classList.remove("white");
+    }
+    else {
+        header.classList.add("dark-mode-bg");
+        body.classList.add("dark-bg");
+        colorSchemeBtn.classList.add("dark-btn");
+        colorSchemeModeImage.classList.add("white-dark-mode-img");
+        detailsContainerElement.classList.add("white");
+        backButtonElement.classList.add("dark-btn");
+    }
 };
 export {};

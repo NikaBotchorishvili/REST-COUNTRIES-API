@@ -78,7 +78,6 @@ section .container #countries {
   max-width: 90vw;
   margin: 0 auto;
   justify-content: space-evenly;
-  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 section .container #countries .card {
@@ -249,7 +248,7 @@ section .container #pagination button img {
 }
 
 .dark-btn {
-  color: white;
+  color: hsl(0, 0%, 100%);
   box-shadow: none;
 }
 

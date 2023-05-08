@@ -8,6 +8,9 @@ const searchSubmitElement = document.querySelector(".search-submit");
 let current_page = 1;
 let rows = 20;
 let isDarkMode = true;
+document.addEventListener("DOMContentLoaded", () => {
+    isDarkMode = Boolean(localStorage.getItem("darkMode"));
+});
 searchSubmitElement.addEventListener("click", (e) => {
     e.preventDefault();
     let searchInputValue = searchInputElement.value.trim();
