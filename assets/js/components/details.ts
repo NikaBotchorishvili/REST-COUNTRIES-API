@@ -230,6 +230,7 @@ const darkMode = () => {
 			link.classList.remove("white")
 			link.classList.remove("white-outline")
 		})
+		backButtonElement.classList.remove("dark-mode-bg", "white");
 	} else {
 		header.classList.add("dark-mode-bg");
 		body.classList.add("dark-bg");
@@ -243,5 +244,6 @@ const darkMode = () => {
 			link.classList.add("white-outline")
 
 		})
+		backButtonElement.classList.add("dark-mode-bg", "white")
 	}
 };

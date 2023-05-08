@@ -84,7 +84,6 @@ const DisplayCountries = (
 		let countryRegionEl = document.createElement("h5");
 		let countryCapitalEl = document.createElement("h5");
 		let countryInfoEl = document.createElement("div");
-		console.log("search");
 		let countryImage: string = data[0].flags.png;
 		let countryName = data[0].name.common;
 		let countryCapital = data[0].capital;
